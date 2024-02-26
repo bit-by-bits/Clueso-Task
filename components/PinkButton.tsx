@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { FC } from "react";
 
 interface PinkButtonProps {
   text: string;
@@ -8,7 +9,7 @@ interface PinkButtonProps {
   onClick?: () => void;
 }
 
-const PinkButton = ({ text, href, onClick }: PinkButtonProps) => {
+const PinkButton: FC<PinkButtonProps> = ({ text, href, onClick }) => {
   const router = useRouter();
 
   return (

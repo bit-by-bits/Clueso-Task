@@ -1,12 +1,13 @@
 "use client";
 
+import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import PinkButton from "../PinkButton";
 
-const Navbar = () => {
+const Navbar: FC = () => {
   return (
     <div className="fixed top-0 left-0 w-screen bg-white px-3 shadow-md z-50 h-18">
       <div className="wrapper flex items-center justify-between">
