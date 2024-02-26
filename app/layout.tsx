@@ -3,6 +3,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +21,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`flex flex-col h-screen w-screen justify-center items-center ${inter.className}`}
+          className={`flex flex-col h-screen w-screen justify-center items-center overflow-hidden ${inter.className}`}
         >
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-full w-full wrapper">
+    <main className="h-full w-full wrapper mt-20">
       <Navbar />
       {children}
     </main>
