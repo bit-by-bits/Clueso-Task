@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { FC } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -13,8 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import PinkButton from "./PinkButton";
-import { FC } from "react";
+import PinkButton from "../common/PinkButton";
 
 interface BuilderProps {
   setData: (data: any) => void;
@@ -23,17 +23,11 @@ interface BuilderProps {
 const Schema = z.object({
   title: z
     .string()
-    .min(5, {
-      message: "Title must be at least 5 characters.",
-    })
-    .max(50, {
-      message: "Title must not be longer than 50 characters.",
-    }),
+    .min(5, { message: "Title must be at least 5 characters." })
+    .max(50, { message: "Title must not be longer than 50 characters." }),
   description: z
     .string()
-    .min(10, {
-      message: "Description must be at least 10 characters.",
-    })
+    .min(10, { message: "Description must be at least 10 characters." })
     .max(160, {
       message: "Description must not be longer than 160 characters.",
     }),
@@ -60,12 +54,7 @@ const Builder: FC<BuilderProps> = ({ setData }) => {
       children: [],
     };
 
-    setData((prev: any) => {
-      return {
-        ...prev,
-        children: [...prev.children, newNode],
-      };
-    });
+    setData((prev: any) => [...prev, newNode]);
   }
 
   return (

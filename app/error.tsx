@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import PinkButton from "@/components/PinkButton";
-import PinkGradient from "@/components/PinkGradient";
-import GridBox from "@/components/GridBox";
+import PinkButton from "@/components/common/PinkButton";
+import PinkGradient from "@/components/common/PinkGradient";
+import GridBox from "@/components/common/GridBox";
 
 export default function Error({
   error,

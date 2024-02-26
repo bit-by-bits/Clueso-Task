@@ -1,6 +1,6 @@
-import PinkGradient from "@/components/PinkGradient";
-import PinkButton from "@/components/PinkButton";
-import GridBox from "@/components/GridBox";
+import PinkGradient from "@/components/common/PinkGradient";
+import PinkButton from "@/components/common/PinkButton";
+import GridBox from "@/components/common/GridBox";
 
 export default function Home() {
   return (

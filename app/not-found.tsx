@@ -1,6 +1,6 @@
-import GridBox from "@/components/GridBox";
-import PinkButton from "@/components/PinkButton";
-import PinkGradient from "@/components/PinkGradient";
+import GridBox from "@/components/common/GridBox";
+import PinkButton from "@/components/common/PinkButton";
+import PinkGradient from "@/components/common/PinkGradient";
 
 export default function NotFound() {
   return (

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import PinkButton from "../PinkButton";
+import PinkButton from "./common/PinkButton";
 
 const Navbar: FC = () => {
   return (

@@ -3,7 +3,7 @@
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import StickyScroll from "@/components/StickyScroll";
+import StickyScroll from "@/components/tree/StickyScroll";
 import { useState } from "react";
 
 export default function Home() {
@@ -22,29 +22,59 @@ export default function Home() {
 
   const [tree, setTree] = useState<any>([
     {
-      title: "Collaborative Editing",
-      description:
-        "Work together in real time with your team, clients, and stakeholders.",
+      title: "Folder 1",
+      description: "This is the first folder",
       children: [
         {
-          title: "Real time changes",
-          description:
-            "See changes as they happen. With our platform, you can track every modification in real time.",
+          title: "File 1",
+          description: "This is a file in Folder 1",
           children: [],
         },
         {
-          title: "Version control",
-          description:
-            "Experience real-time updates and never stress about version control again.",
-          children: [],
+          title: "Folder 1.1",
+          description: "This is a subfolder in Folder 1",
+          children: [
+            {
+              title: "File 2",
+              description: "This is a file in Folder 1.1",
+              children: [],
+            },
+          ],
         },
       ],
     },
     {
-      title: "Running out of content",
-      description:
-        "Experience real-time updates and never stress about version control again.",
-      children: [],
+      title: "Folder 2",
+      description: "This is the second folder",
+      children: [
+        {
+          title: "File 3",
+          description: "This is a file in Folder 2",
+          children: [],
+        },
+        {
+          title: "Folder 2.1",
+          description: "This is a subfolder in Folder 2",
+          children: [
+            {
+              title: "File 4",
+              description: "This is a file in Folder 2.1",
+              children: [],
+            },
+            {
+              title: "Folder 2.1.1",
+              description: "This is a subfolder in Folder 2.1",
+              children: [
+                {
+                  title: "File 5",
+                  description: "This is a file in Folder 2.1.1",
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   ]);
 
