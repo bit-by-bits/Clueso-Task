@@ -1,4 +1,4 @@
-import PinkGradient from "@/components/common/PinkGradient";
+import PinkGradient from "@/components/text/PinkGradient";
 import PinkButton from "@/components/common/PinkButton";
 import GridBox from "@/components/common/GridBox";
 

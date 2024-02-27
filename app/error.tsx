@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import PinkButton from "@/components/common/PinkButton";
-import PinkGradient from "@/components/common/PinkGradient";
+import PinkGradient from "@/components/text/PinkGradient";
 import GridBox from "@/components/common/GridBox";
 
 export default function Error({

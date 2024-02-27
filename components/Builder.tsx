@@ -13,12 +13,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import PinkButton from "../common/PinkButton";
-
-interface BuilderProps {
-  setData: (data: any) => void;
-}
+import { toast } from "@/components/ui/toast/use-toast";
+import PinkButton from "./common/PinkButton";
+import { useTreeStore } from "@/lib/store";
 
 const Schema = z.object({
   title: z
@@ -33,7 +30,9 @@ const Schema = z.object({
     }),
 });
 
-const Builder: FC<BuilderProps> = ({ setData }) => {
+const Builder: FC = () => {
+  const { setTree } = useTreeStore();
+
   const form = useForm<z.infer<typeof Schema>>({
     resolver: zodResolver(Schema),
   });
@@ -53,8 +52,6 @@ const Builder: FC<BuilderProps> = ({ setData }) => {
       description: data.description,
       children: [],
     };
-
-    setData((prev: any) => [...prev, newNode]);
   }
 
   return (
