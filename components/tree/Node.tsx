@@ -1,12 +1,13 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useTreeStore, TreeItem } from "@/lib/store";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { motion } from "framer-motion";
 import Tree from "./Tree";
-import { TreeItem } from "@/lib/store";
+import PinkButton from "../common/PinkButton";
 
 interface NodeProps {
   item: TreeItem;
@@ -15,24 +16,39 @@ interface NodeProps {
 }
 
 const Node: FC<NodeProps> = ({ item, level, curr }) => {
-  const { h2: Mh2, p: Mp } = motion;
+  const { div: Mdiv, h2: Mh2, p: Mp } = motion;
   const { id, title, description, children } = item;
 
   const isInView = parseInt(id.split(".")[0]) - 1 === curr;
+
+  const { selected, setSelected } = useTreeStore();
+  const handleClick = () => setSelected(item);
 
   return (
     <div className="my-4">
       <div className="flex">
         <Mh2
           initial={{ opacity: 0 }}
-          animate={{ opacity: isInView ? 1 : 0.3 }}
-          className="text-2xl font-bold"
+          animate={{
+            opacity: isInView ? 1 : 0.3,
+            color: selected?.id === id ? "deeppink" : "black",
+          }}
+          className="text-2xl font-bold min-w-max"
+          onClick={handleClick}
         >
           {title}
         </Mh2>
         {children && children.length ? (
           <Collapsible>
-            <CollapsibleTrigger>Toggle</CollapsibleTrigger>
+            <CollapsibleTrigger>
+              <Mdiv
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isInView ? 1 : 0.3 }}
+                className="ml-4 scale-75 transform origin-left"
+              >
+                <PinkButton text="Toggle" />
+              </Mdiv>
+            </CollapsibleTrigger>
             <CollapsibleContent>
               <Tree items={children} level={level + 1} curr={curr} />
             </CollapsibleContent>

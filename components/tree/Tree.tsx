@@ -9,7 +9,7 @@ interface TreeProps {
 }
 
 const Tree: FC<TreeProps> = ({ items, level, curr }) => {
-  return items.map((e, i) => (
+  return items?.map((e, i) => (
     <Node key={i} item={e} level={level} curr={curr} />
   ));
 };

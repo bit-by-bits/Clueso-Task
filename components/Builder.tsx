@@ -1,9 +1,8 @@
-"use client";
-
-import { z } from "zod";
 import { FC } from "react";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTreeStore, TreeItem } from "@/lib/store";
 import {
   Form,
   FormControl,
@@ -13,9 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/toast/use-toast";
 import PinkButton from "./common/PinkButton";
-import { useTreeStore } from "@/lib/store";
+import { useToast } from "./ui/toast/use-toast";
+import { Switch } from "./ui/switch";
 
 const Schema = z.object({
   title: z
@@ -28,40 +27,44 @@ const Schema = z.object({
     .max(160, {
       message: "Description must not be longer than 160 characters.",
     }),
+  position: z.enum(["Start", "End"]),
 });
 
 const Builder: FC = () => {
-  const { setTree } = useTreeStore();
-
   const form = useForm<z.infer<typeof Schema>>({
     resolver: zodResolver(Schema),
+    defaultValues: { position: "Start" },
   });
 
-  function onSubmit(data: z.infer<typeof Schema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  const { control, handleSubmit } = form;
+  const { toast } = useToast();
+  const { selected, insertNode } = useTreeStore();
 
-    const newNode = {
-      title: data.title,
-      description: data.description,
+  function onSubmit(data: z.infer<typeof Schema>) {
+    const { title, description, position } = data;
+
+    const newNode: TreeItem = {
+      id: selected
+        ? `${selected.id}.${Math.random().toString().slice(2)}`
+        : "1",
+      title,
+      description,
       children: [],
     };
+
+    if (insertNode(newNode, position))
+      toast({ title: "Success", description: "New node added successfully." });
+    else toast({ title: "Error", description: "Failed to add new node." });
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-white space-y-6 p-4 rounded"
       >
         <FormField
-          control={form.control}
+          control={control}
           name="title"
           render={({ field }) => (
             <FormItem>
@@ -79,7 +82,7 @@ const Builder: FC = () => {
           )}
         />
         <FormField
-          control={form.control}
+          control={control}
           name="description"
           render={({ field }) => (
             <FormItem>
@@ -95,7 +98,24 @@ const Builder: FC = () => {
             </FormItem>
           )}
         />
-        <PinkButton text="Submit" onClick={form.handleSubmit(onSubmit)} />
+        <FormField
+          control={control}
+          name="position"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-4">
+              <FormControl>
+                <Switch
+                  checked={field.value === "End"}
+                  onCheckedChange={(isChecked) =>
+                    field.onChange(isChecked ? "End" : "Start")
+                  }
+                />
+              </FormControl>
+              <FormLabel>{`Add @${field.value}`}</FormLabel>
+            </FormItem>
+          )}
+        />
+        <PinkButton text={`Add To ${selected?.title || "parent"}`} />
       </form>
     </Form>
   );

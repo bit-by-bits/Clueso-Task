@@ -7,8 +7,8 @@ import ArchitectsDaughter from "./text/ArchitectsDaughter";
 import Builder from "./Builder";
 import Tree from "./tree/Tree";
 
-const colors = ["pink-100", "white", "neutral-100"].map(
-  (color) => `var(--${color})`,
+const colors = ["white", "pink-100", "white", "neutral-100"].map(
+  (color) => `var(--${color})`
 );
 
 const Task: FC = () => {
