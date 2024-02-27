@@ -1,10 +1,10 @@
 "use client";
 
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
 interface PinkButtonProps {
-  text: string;
+  text: string | ReactNode;
   href?: string;
   onClick?: () => void;
 }
@@ -14,7 +14,7 @@ const PinkButton: FC<PinkButtonProps> = ({ text, href, onClick }) => {
 
   return (
     <button
-      className="px-4 py-2 backdrop-blur-sm text-white border-0 rounded-md hover:shadow-[0px_3px_9px_3px_rgba(0,0,0,0.2)] bg-pink-600 transition duration-300 text-sm"
+      className="px-3 py-2 backdrop-blur-sm text-white border-0 rounded-lg hover:shadow-lg bg-pink-600 transition duration-300 text-sm hover:bg-pink-700"
       onClick={() => {
         if (onClick) {
           onClick();

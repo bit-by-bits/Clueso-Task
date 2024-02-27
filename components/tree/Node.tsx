@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { motion } from "framer-motion";
 import { useTreeStore, TreeItem } from "@/lib/store";
 import {
@@ -7,7 +7,8 @@ import {
   CollapsibleTrigger,
 } from "../ui/collapsible";
 import Tree from "./Tree";
-import PinkButton from "../common/PinkButton";
+import { AiOutlineDelete } from "react-icons/ai";
+import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 
 interface NodeProps {
   item: TreeItem;
@@ -17,44 +18,63 @@ interface NodeProps {
 
 const Node: FC<NodeProps> = ({ item, level, curr }) => {
   const { div: Mdiv, h2: Mh2, p: Mp } = motion;
-  const { id, title, description, children } = item;
+  const { id, title, description, children, isOpen } = item;
 
+  const { selected, setSelected, toggleNode, deleteNode } = useTreeStore();
+
+  const isActive = selected?.id === id;
   const isInView = parseInt(id.split(".")[0]) - 1 === curr;
 
-  const { selected, setSelected } = useTreeStore();
-  const handleClick = () => setSelected(item);
+  const handleSelect = () => setSelected(isActive ? null : item);
+  const handleDelete = () => deleteNode(id);
+  const handleToggle = () => toggleNode(id);
 
   return (
     <div className="my-4">
-      <div className="flex">
+      <div className="flex items-center gap-4">
         <Mh2
           initial={{ opacity: 0 }}
           animate={{
             opacity: isInView ? 1 : 0.3,
-            color: selected?.id === id ? "deeppink" : "black",
+            color: isActive ? "red" : "black",
           }}
-          className="text-2xl font-bold min-w-max"
-          onClick={handleClick}
+          className="text-2xl font-bold min-w-max cursor-pointer"
+          onClick={handleSelect}
         >
           {title}
         </Mh2>
-        {children && children.length ? (
-          <Collapsible>
-            <CollapsibleTrigger>
-              <Mdiv
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isInView ? 1 : 0.3 }}
-                className="ml-4 scale-75 transform origin-left"
-              >
-                <PinkButton text="Toggle" />
-              </Mdiv>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <Tree items={children} level={level + 1} curr={curr} />
-            </CollapsibleContent>
-          </Collapsible>
-        ) : null}
+
+        <Mdiv
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isInView ? 1 : 0.3 }}
+          className="cursor-pointer hover:text-red-500"
+          onClick={handleDelete}
+        >
+          <AiOutlineDelete />
+        </Mdiv>
       </div>
+      {children && children.length ? (
+        <Collapsible open={isOpen} onOpenChange={handleToggle}>
+          <CollapsibleTrigger>
+            <Mdiv
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isInView ? 1 : 0.3 }}
+              className="ml-4 scale-75 transform origin-left font-semibold cursor-pointer hover:text-pink-600 flex items-center gap-2"
+            >
+              <span>{isOpen ? <RiMenuFoldLine /> : <RiMenuUnfoldLine />}</span>
+              <span>{isOpen ? "Collapse" : "Expand"}</span>
+            </Mdiv>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div
+              className="ml-4 mt-2 w-full border-l-2 border-pink-200 pl-2"
+              style={{ marginLeft: "1rem" }}
+            >
+              <Tree items={children} level={level + 1} curr={curr} />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      ) : null}
       <Mp initial={{ opacity: 0 }} animate={{ opacity: isInView ? 1 : 0.3 }}>
         {description}
       </Mp>

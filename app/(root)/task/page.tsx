@@ -1,9 +1,9 @@
 "use client";
 
+import Task from "@/components/Task";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/toast/use-toast";
-import Task from "@/components/Task";
 
 export default function Home() {
   const router = useRouter();

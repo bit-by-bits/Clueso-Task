@@ -50,6 +50,7 @@ const Builder: FC = () => {
       title,
       description,
       children: [],
+      isOpen: false,
     };
 
     if (insertNode(newNode, position))
@@ -68,7 +69,10 @@ const Builder: FC = () => {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <div className="flex items-center gap-2">
+                <FormLabel>Title</FormLabel>
+                <FormMessage className="text-xs" />
+              </div>
               <FormControl>
                 <input
                   type="text"
@@ -77,7 +81,6 @@ const Builder: FC = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -86,7 +89,10 @@ const Builder: FC = () => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <div className="flex items-center gap-2">
+                <FormLabel>Description</FormLabel>
+                <FormMessage className="text-xs" />
+              </div>
               <FormControl>
                 <Textarea
                   placeholder="Enter description"
@@ -94,7 +100,6 @@ const Builder: FC = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -115,7 +120,7 @@ const Builder: FC = () => {
             </FormItem>
           )}
         />
-        <PinkButton text={`Add To ${selected?.title || "parent"}`} />
+        <PinkButton text={`Add To ${selected?.title || "Parent"}`} />
       </form>
     </Form>
   );

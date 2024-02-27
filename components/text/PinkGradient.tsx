@@ -6,9 +6,16 @@ interface PinkGradientProps {
 
 const PinkGradient: FC<PinkGradientProps> = ({ text }) => {
   return (
-    <p className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-pink-600 via-pink-600 to-indigo-600 py-8">
-      {text}
-    </p>
+    <div className="flex items-center justify-center text-center">
+      {text?.split(" ").map((word, i) => (
+        <p
+          key={i}
+          className={`text-4xl sm:text-7xl font-semibold relative z-20 py-8 bg-clip-text text-transparent bg-gradient-to-b ${i % 2 ? "from-[#ff008c] via-[#ff008c] to-[#4f46e5]" : "from-transparent via-black to-black"}`}
+        >
+          {word}&nbsp;
+        </p>
+      ))}
+    </div>
   );
 };
 
