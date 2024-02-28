@@ -5,7 +5,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../ui/collapsible";
+} from "../shadcn-ui/collapsible";
 import Tree from "./Tree";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
@@ -54,7 +54,6 @@ const Node: FC<NodeProps> = ({ item, level }) => {
         >
           {title}
         </Mh2>
-
         <Mdiv
           initial={{ opacity: 0 }}
           animate={{ opacity: isInView ? 1 : 0.3 }}

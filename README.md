@@ -5,21 +5,25 @@ This repository contains a solution for a task assigned by Clueso, focusing on b
 #### Quick Start
 
 # Clone the repository
+
 ```bash
 git clone https://github.com/bit-by-bits/Clueso-Task.git
 ```
 
 # Navigate to project directory
+
 ```bash
 cd Clueso-Task
 ```
 
 # Install dependencies
+
 ```bash
 npm install
 ```
 
 # Start development server
+
 ```bash
 npm run dev
 ```
@@ -33,11 +37,13 @@ npm run dev
 #### Shell Scripts
 
 - **Build**: Generate a production build.
+
   ```bash
   npm run build
   ```
 
 - **Lint**: Run ESLint for code linting.
+
   ```bash
   npm run lint
   ```

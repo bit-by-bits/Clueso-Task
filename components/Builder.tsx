@@ -10,11 +10,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/shadcn-ui/form";
+import { Textarea } from "@/components/shadcn-ui/textarea";
 import PinkButton from "./common/PinkButton";
-import { useToast } from "./ui/toast/use-toast";
-import { Switch } from "./ui/switch";
+import { useToast } from "./shadcn-ui/toast/use-toast";
+import { Switch } from "./shadcn-ui/switch";
 
 const Schema = z.object({
   title: z
@@ -54,8 +54,17 @@ const Builder: FC = () => {
     };
 
     if (insertNode(newNode, position))
-      toast({ title: "Success", description: "New node added successfully." });
-    else toast({ title: "Error", description: "Check the parent node." });
+      toast({
+        variant: "success",
+        title: "Successfully Added",
+        description: `New node "${title}" has been added.`,
+      });
+    else
+      toast({
+        variant: "destructive",
+        title: "Failed to Add",
+        description: `Node "${title}" could not be added.`,
+      });
   }
 
   return (

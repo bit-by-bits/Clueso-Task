@@ -23,14 +23,17 @@ interface TreeState {
   deleteAll: () => void;
 }
 
-const findParentNode = (node: TreeItem, targetId: string): TreeItem | null => {
-  if (node.id === targetId) return node;
-
-  if (node.children)
-    for (const child of node.children) {
-      const found = findParentNode(child, targetId);
-      if (found) return found;
+const findParentNode = (
+  tree: TreeItem[],
+  targetId: string,
+): TreeItem | null => {
+  for (const node of tree) {
+    if (node.id === targetId) return node;
+    else if (node.children && node.children.length > 0) {
+      const result = findParentNode(node.children, targetId);
+      if (result) return result;
     }
+  }
 
   return null;
 };
@@ -255,7 +258,7 @@ export const useTreeStore = create<TreeState>((set) => ({
       return false;
     }
 
-    const parentNode = findParentNode(updatedTree[0], selectedParent.id);
+    const parentNode = findParentNode(updatedTree, selectedParent.id);
 
     if (!parentNode) {
       console.error("Parent node not found.");

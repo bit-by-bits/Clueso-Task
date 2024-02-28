@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useTreeStore } from "@/lib/store";
 import Builder from "./Builder";
@@ -9,10 +7,8 @@ import Empty from "./tree/Empty";
 import Buttons from "./tree/Buttons";
 
 const Task: FC = () => {
-  const { div: Mdiv } = motion;
-  const { tree, setCurrent } = useTreeStore();
-
   const ref = useRef<HTMLDivElement>(null);
+  const { tree, setCurrent } = useTreeStore();
 
   const { scrollYProgress } = useScroll({
     container: ref,
@@ -31,7 +27,7 @@ const Task: FC = () => {
   });
 
   return (
-    <Mdiv
+    <div
       ref={ref}
       className="h-[calc(100vh-4rem)] w-full overflow-y-auto flex justify-evenly relative space-x-10 rounded-md p-10 bg-dot-pink-200"
     >
@@ -45,10 +41,10 @@ const Task: FC = () => {
           <Empty />
         )}
       </div>
-      <Mdiv className="hidden md:block h-max w-1/3 rounded-md bg-white sticky top-10 overflow-hidden">
+      <div className="hidden md:block h-max w-1/3 rounded-md bg-white sticky top-10 overflow-hidden">
         <Builder />
-      </Mdiv>
-    </Mdiv>
+      </div>
+    </div>
   );
 };
 

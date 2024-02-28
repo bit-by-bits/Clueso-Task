@@ -10,7 +10,7 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from "../ui/drawer";
+} from "../shadcn-ui/drawer";
 import Builder from "../Builder";
 
 const Buttons = () => {

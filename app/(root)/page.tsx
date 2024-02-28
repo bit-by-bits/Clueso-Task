@@ -5,11 +5,11 @@ import GridBox from "@/components/common/GridBox";
 import PinkGradient from "@/components/text/PinkGradient";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
-import { useToast } from "@/components/ui/toast/use-toast";
+import { useToast } from "@/components/shadcn-ui/toast/use-toast";
 import { FaAngleRight } from "react-icons/fa";
 import ArchitectsDaughter from "@/components/text/ArchitectsDaughter";
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter();
   const { userId } = useAuth();
   const { toast } = useToast();
@@ -19,12 +19,11 @@ export default function Home() {
       router.push(process.env.NEXT_PUBLIC_HOME_URL || "/");
 
       toast({
+        variant: "destructive",
         title: "Unauthorized Access",
         description: "You need to be logged in to access this page",
       });
-    }
-
-    router.push("/task");
+    } else router.push("/task");
   };
 
   return (

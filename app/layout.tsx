@@ -3,13 +3,13 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "@/components/ui/toast/toaster";
+import { Toaster } from "@/components/shadcn-ui/toast/toaster";
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clueso Task: Task",
+  title: "Clueso: Task",
   description:
     "Explore a dynamic tree structure solution for the Clueso frontend task, empowering users to manage hierarchical data effectively.",
   keywords: [
