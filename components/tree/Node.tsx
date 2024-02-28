@@ -13,21 +13,32 @@ import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 interface NodeProps {
   item: TreeItem;
   level: number;
-  curr: number;
 }
 
-const Node: FC<NodeProps> = ({ item, level, curr }) => {
+const Node: FC<NodeProps> = ({ item, level }) => {
   const { div: Mdiv, h2: Mh2, p: Mp } = motion;
   const { id, title, description, children, isOpen } = item;
 
-  const { selected, setSelected, toggleNode, deleteNode } = useTreeStore();
+  const { selected, current, setSelected, setCurrent, toggleNode, deleteNode } =
+    useTreeStore();
 
+  const ID = parseInt(id.split(".")[0]);
   const isActive = selected?.id === id;
-  const isInView = parseInt(id.split(".")[0]) - 1 === curr;
+  const isInView = ID === current;
 
-  const handleSelect = () => setSelected(isActive ? null : item);
-  const handleDelete = () => deleteNode(id);
-  const handleToggle = () => toggleNode(id);
+  const handleSelect = () => {
+    setSelected(isActive ? null : item);
+    setCurrent(ID);
+  };
+
+  const handleDelete = () => {
+    deleteNode(id);
+  };
+
+  const handleToggle = () => {
+    toggleNode(id);
+    setCurrent(ID);
+  };
 
   return (
     <div className="my-4">
@@ -36,7 +47,7 @@ const Node: FC<NodeProps> = ({ item, level, curr }) => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: isInView ? 1 : 0.3,
-            color: isActive ? "red" : "black",
+            color: isActive ? "deeppink" : "black",
           }}
           className="text-2xl font-bold min-w-max cursor-pointer"
           onClick={handleSelect}
@@ -70,7 +81,7 @@ const Node: FC<NodeProps> = ({ item, level, curr }) => {
               className="ml-4 mt-2 w-full border-l-2 border-pink-200 pl-2"
               style={{ marginLeft: "1rem" }}
             >
-              <Tree items={children} level={level + 1} curr={curr} />
+              <Tree items={children} level={level + 1} />
             </div>
           </CollapsibleContent>
         </Collapsible>

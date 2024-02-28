@@ -31,7 +31,7 @@ export default function Home() {
     <GridBox>
       <div className="flex flex-col items-center justify-center">
         <PinkGradient text="Clueso Task" />
-        <div className="flex flex-col items-center gap-2 mb-4">
+        <div className="flex flex-col items-center gap-0 sm:gap-2 mb-4">
           <ArchitectsDaughter text="Here is the task for the frontend position at Clueso." />
           <ArchitectsDaughter text="Please log in to view the task." />
         </div>

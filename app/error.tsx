@@ -23,7 +23,7 @@ export default function Error({
     <GridBox>
       <div className="flex flex-col items-center justify-center">
         <PinkGradient text=":/ Page Crashed!" />
-        <div className="flex flex-col items-center gap-2 mb-4">
+        <div className="flex flex-col items-center gap-0 sm:gap-2 mb-4">
           <ArchitectsDaughter text="Something went wrong. We are working on it." />
           <ArchitectsDaughter text="Please return home." />
         </div>

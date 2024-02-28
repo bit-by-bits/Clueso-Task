@@ -9,7 +9,7 @@ export default function NotFound() {
     <GridBox>
       <div className="flex flex-col items-center justify-center">
         <PinkGradient text=":/ Not Found!" />
-        <div className="flex flex-col items-center gap-2 mb-4">
+        <div className="flex flex-col items-center gap-0 sm:gap-2 mb-4">
           <ArchitectsDaughter text="The page you are looking for does not exist." />
           <ArchitectsDaughter text="Please return home." />
         </div>

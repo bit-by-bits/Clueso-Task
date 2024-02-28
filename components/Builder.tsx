@@ -55,7 +55,7 @@ const Builder: FC = () => {
 
     if (insertNode(newNode, position))
       toast({ title: "Success", description: "New node added successfully." });
-    else toast({ title: "Error", description: "Failed to add new node." });
+    else toast({ title: "Error", description: "Check the parent node." });
   }
 
   return (

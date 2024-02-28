@@ -14,7 +14,7 @@ const PinkButton: FC<PinkButtonProps> = ({ text, href, onClick }) => {
 
   return (
     <button
-      className="px-3 py-2 backdrop-blur-sm text-white border-0 rounded-lg hover:shadow-lg bg-pink-600 transition duration-300 text-sm hover:bg-pink-700"
+      className="px-3 py-2 backdrop-blur-sm text-white border-0 rounded-lg hover:shadow-lg bg-pink-600 transition duration-300 text-sm hover:bg-pink-700 min-w-max"
       onClick={() => {
         if (onClick) {
           onClick();

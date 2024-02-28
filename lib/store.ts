@@ -11,11 +11,16 @@ export interface TreeItem {
 interface TreeState {
   tree: TreeItem[];
   selected: TreeItem | null;
+  current: number;
   setTree: (tree: TreeItem[]) => void;
   setSelected: (node: TreeItem | null) => void;
+  setCurrent: (curr: number) => void;
   insertNode: (newNode: TreeItem, position: "Start" | "End") => boolean;
   toggleNode: (id: string) => void;
   deleteNode: (id: string) => void;
+  openAll: () => void;
+  closeAll: () => void;
+  deleteAll: () => void;
 }
 
 const findParentNode = (node: TreeItem, targetId: string): TreeItem | null => {
@@ -55,6 +60,14 @@ const deleteNodeRecursive = (tree: TreeItem[], id: string): TreeItem[] => {
       return [...acc, node];
     }
   }, [] as TreeItem[]);
+};
+
+const toggleAll = (tree: TreeItem[], isOpen: boolean): TreeItem[] => {
+  return tree.map((node) => ({
+    ...node,
+    isOpen: isOpen,
+    children: node.children ? toggleAll(node.children, isOpen) : [],
+  }));
 };
 
 export const useTreeStore = create<TreeState>((set) => ({
@@ -223,8 +236,10 @@ export const useTreeStore = create<TreeState>((set) => ({
     },
   ],
   selected: null,
+  current: 1,
   setTree: (tree) => set({ tree }),
   setSelected: (node) => set({ selected: node }),
+  setCurrent: (curr) => set({ current: curr }),
   insertNode: (newNode, position) => {
     const updatedTree = [...useTreeStore.getState().tree];
     const selectedParent = useTreeStore.getState().selected;
@@ -271,5 +286,20 @@ export const useTreeStore = create<TreeState>((set) => ({
 
     if (selected && selected.id === id) set({ selected: null });
     set({ tree: updatedTree });
+  },
+  openAll: () => {
+    const { tree } = useTreeStore.getState();
+    const updatedTree = toggleAll(tree, true);
+    set({ tree: updatedTree });
+  },
+  closeAll: () => {
+    const { tree } = useTreeStore.getState();
+    const updatedTree = toggleAll(tree, false);
+    set({ tree: updatedTree });
+  },
+
+  deleteAll: () => {
+    set({ tree: [] });
+    set({ selected: null });
   },
 }));

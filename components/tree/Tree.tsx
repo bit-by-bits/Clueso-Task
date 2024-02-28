@@ -5,13 +5,10 @@ import { TreeItem } from "@/lib/store";
 interface TreeProps {
   items: TreeItem[];
   level: number;
-  curr: number;
 }
 
-const Tree: FC<TreeProps> = ({ items, level, curr }) => {
-  return items?.map((e, i) => (
-    <Node key={i} item={e} level={level} curr={curr} />
-  ));
+const Tree: FC<TreeProps> = ({ items, level }) => {
+  return items?.map((e, i) => <Node key={i} item={e} level={level} />);
 };
 
 export default Tree;

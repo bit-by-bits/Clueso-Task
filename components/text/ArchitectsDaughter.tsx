@@ -15,7 +15,7 @@ interface ArchitectsDaughterProps {
 const ArchitectsDaughter: FC<ArchitectsDaughterProps> = ({ text }) => {
   return (
     <div
-      className={`${architectsDaughter.className} text-pink-600 text-2xl sm:text-3xl text-center w-full`}
+      className={`${architectsDaughter.className} text-pink-600 text-xl sm:text-3xl text-center w-4/5`}
     >
       {text}
     </div>

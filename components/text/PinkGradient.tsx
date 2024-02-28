@@ -10,7 +10,7 @@ const PinkGradient: FC<PinkGradientProps> = ({ text }) => {
       {text?.split(" ").map((word, i) => (
         <p
           key={i}
-          className={`text-4xl sm:text-7xl font-semibold relative z-20 py-8 bg-clip-text text-transparent bg-gradient-to-b ${i % 2 ? "from-[#ff008c] via-[#ff008c] to-[#4f46e5]" : "from-transparent via-black to-black"}`}
+          className={`text-5xl sm:text-7xl font-semibold relative z-20 py-4 sm:py-8 bg-clip-text text-transparent bg-gradient-to-b ${i % 2 ? "from-[#ff008c] via-[#ff008c] to-[#4f46e5]" : "from-transparent via-black to-black"}`}
         >
           {word}&nbsp;
         </p>
