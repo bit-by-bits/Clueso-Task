@@ -9,8 +9,24 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clueso: Frontend Task",
-  description: "Clueso Frontend Task",
+  title: "Clueso Task: Task",
+  description:
+    "Explore a dynamic tree structure solution for the Clueso frontend task, empowering users to manage hierarchical data effectively.",
+  keywords: [
+    "Clueso",
+    "frontend",
+    "task",
+    "dynamic",
+    "tree structure",
+    "hierarchical data",
+    "React",
+    "Next.js",
+    "Zustand",
+    "React Hook Form",
+    "Tailwind CSS",
+    "Framer Motion",
+    "authentication",
+  ],
 };
 
 export default function RootLayout({
